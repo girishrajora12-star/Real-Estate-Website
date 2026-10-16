@@ -470,6 +470,7 @@ p, span, a, button, input, textarea, label {
 
 /* Minimal Extraction Loading Indicator */
 .hero-extract-loader {
+  display: none !important;
   position: absolute;
   top: 90px;
   left: 50%;
@@ -522,9 +523,8 @@ p, span, a, button, input, textarea, label {
   max-width: 840px;
   width: calc(100% - clamp(4rem, 10vw, 9rem));
   pointer-events: none;
-  padding: 1.5rem 2rem;
-  border-radius: 20px;
-  background: radial-gradient(ellipse at bottom left, rgba(10, 10, 10, 0.75) 0%, rgba(10, 10, 10, 0.35) 55%, rgba(10, 10, 10, 0) 80%);
+  padding: 0;
+  background: none;
 }
 
 .hero-chapter {
@@ -548,11 +548,12 @@ p, span, a, button, input, textarea, label {
   font-family: 'degular', sans-serif;
   font-weight: 500;
   font-style: normal;
-  font-size: clamp(2.2rem, 4.8vw, 4.2rem);
-  line-height: 1.12;
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  line-height: 1.15;
   letter-spacing: -0.025em;
   color: #FFFFFF;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.8);
+  text-shadow: none;
+  filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

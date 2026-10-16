@@ -12,18 +12,18 @@
 export const WALKTHROUGH_TOTAL_DURATION = 20.06;
 
 export const WALKTHROUGH_CUES = [
-  { time: 0,  text: "Home begins at the doorstep." },
-  { time: 2,  text: "Crafted in teak, built to welcome." },
-  { time: 3,  text: "Bring the garden inside." },
-  { time: 5,  text: "Rooms that invite you to stay." },
-  { time: 7,  text: "Long dinners. Open views." },
-  { time: 8,  text: "Privacy, without closing off." },
-  { time: 10, text: "Stairs that feel like sculpture." },
-  { time: 12, text: "Details with a story." },
-  { time: 13, text: "Every step softly lit." },
-  { time: 15, text: "Tradition on every wall." },
-  { time: 17, text: "Slow down. Swing a little." },
-  { time: 18, text: "Wake up above the treetops." }
+  { time: 0,  text: "Home begins\nat the doorstep." },
+  { time: 2,  text: "Crafted in teak,\nbuilt to welcome." },
+  { time: 3,  text: "Bring the garden\ninside." },
+  { time: 5,  text: "Rooms that invite\nyou to stay." },
+  { time: 7,  text: "Long dinners.\nOpen views." },
+  { time: 8,  text: "Privacy, without\nclosing off." },
+  { time: 10, text: "Stairs that feel\nlike sculpture." },
+  { time: 12, text: "Details with\na story." },
+  { time: 13, text: "Every step\nsoftly lit." },
+  { time: 15, text: "Tradition on\nevery wall." },
+  { time: 17, text: "Slow down.\nSwing a little." },
+  { time: 18, text: "Wake up above\nthe treetops." }
 ];
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -195,8 +195,8 @@ function initApp() {
     if (!heroSection || !canvas) return;
 
     const ctx = canvas.getContext('2d', { alpha: false });
-    let totalFrames = 300;
-    let videoDuration = 20.065;
+    let totalFrames = 150;
+    let videoDuration = 20.06;
     let frameImages = new Array(totalFrames);
     let lastDrawnIndex = 0;
     let targetFrameIndex = 0;
@@ -267,6 +267,16 @@ function initApp() {
     resizeCanvas();
 
     // Preload extracted frames from House Walkthrough Website.mp4
+    const ensureFrameLoaded = (idx) => {
+      const clamped = Math.min(totalFrames - 1, Math.max(0, idx));
+      if (!frameImages[clamped]) {
+        const img = new Image();
+        img.src = getFramePath(clamped);
+        frameImages[clamped] = img;
+      }
+    };
+
+    // Preload extracted frames intelligently for smooth scrub
     const loadFrames = (count) => {
       totalFrames = count || totalFrames;
       frameImages = new Array(totalFrames);
@@ -283,50 +293,38 @@ function initApp() {
       };
       frameImages[0] = firstImg;
 
-      // Progressive preloading of remaining frames
-      const preloadRemaining = () => {
-        // First pass: load every 3rd frame for quick scrub coverage
-        for (let i = 1; i < totalFrames; i += 3) {
-          if (!frameImages[i]) {
-            const img = new Image();
-            img.src = getFramePath(i);
-            frameImages[i] = img;
-          }
-        }
-        // Second pass: fill in all remaining frames
-        for (let i = 1; i < totalFrames; i++) {
-          if (!frameImages[i]) {
-            const img = new Image();
-            img.src = getFramePath(i);
-            frameImages[i] = img;
-          }
-        }
-      };
+      // Pass 1: Keyframe stride for immediate scrub coverage across whole timeline
+      const stride = totalFrames > 300 ? 10 : 3;
+      for (let i = 0; i < totalFrames; i += stride) {
+        ensureFrameLoaded(i);
+      }
 
-      if (window.requestIdleCallback) {
-        window.requestIdleCallback(preloadRemaining);
-      } else {
-        setTimeout(preloadRemaining, 50);
+      // Pass 2: Buffer initial 35 frames
+      for (let i = 1; i < Math.min(35, totalFrames); i++) {
+        ensureFrameLoaded(i);
       }
     };
 
-    // Start loading the 300 extracted frames immediately
+    // Start loading frames immediately
     loadFrames(totalFrames);
 
-    // Sync manifest parameters if available
-    (async () => {
+    // Sync manifest parameters and expose reloader
+    const syncManifest = async () => {
       try {
-        const res = await fetch('/assets/frames/manifest.json');
+        const res = await fetch(`/assets/frames/manifest.json?t=${Date.now()}`);
         if (res.ok) {
           const data = await res.json();
-          if (data && data.totalFrames && data.totalFrames !== totalFrames) {
+          if (data && data.totalFrames) {
             totalFrames = data.totalFrames;
-            videoDuration = data.duration || 20.065;
+            videoDuration = data.duration || 20.0;
             loadFrames(totalFrames);
           }
         }
       } catch (e) {}
-    })();
+    };
+
+    window.reloadWalkthroughFrames = syncManifest;
+    syncManifest();
 
     // Smooth render tick loop (interpolates between frames when scrolling)
     function tick() {
@@ -334,6 +332,12 @@ function initApp() {
       if (Math.abs(diff) > 0.05) {
         currentFrameIndex += diff * 0.35;
         drawFrame(Math.round(currentFrameIndex));
+
+        // Buffer lookahead frames around scroll position
+        const center = Math.round(targetFrameIndex);
+        for (let i = -12; i <= 24; i++) {
+          ensureFrameLoaded(center + i);
+        }
       }
       requestAnimationFrame(tick);
     }
@@ -770,5 +774,229 @@ function initApp() {
         }
       }, 1400);
     });
+  }
+
+  // =========================================================================
+  // 11. WALKTHROUGH VIDEO & FRAME MANAGER
+  // =========================================================================
+  initVideoManager();
+
+  function initVideoManager() {
+    const videoModal = document.getElementById('videoModal');
+    const openBtn = document.getElementById('openVideoModalBtn');
+    const closeBtn = document.getElementById('closeVideoModalBtn');
+    const dropzone = document.getElementById('videoDropzone');
+    const fileInput = document.getElementById('videoFileInput');
+    const progressWrap = document.getElementById('videoUploadProgressWrap');
+    const progressBar = document.getElementById('videoProgressBar');
+    const progressLabel = document.getElementById('videoProgressLabel');
+    const progressPercent = document.getElementById('videoProgressPercent');
+    const activeFramesCount = document.getElementById('activeFramesCount');
+    const sourceVideoName = document.getElementById('sourceVideoName');
+    const triggerBtn = document.getElementById('triggerExtractBtn');
+    const urlInput = document.getElementById('videoUrlInput');
+    const urlBtn = document.getElementById('extractUrlBtn');
+
+    if (!videoModal) return;
+
+    const openVideoModal = () => {
+      videoModal.style.display = 'flex';
+      refreshStatus();
+    };
+
+    const closeVideoModal = () => {
+      videoModal.style.display = 'none';
+    };
+
+    if (openBtn) openBtn.addEventListener('click', openVideoModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeVideoModal);
+    const heroQuickBtn = document.getElementById('heroQuickUploadBtn');
+    if (heroQuickBtn) {
+      heroQuickBtn.addEventListener('click', () => {
+        if (fileInput) fileInput.click();
+      });
+    }
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) closeVideoModal();
+    });
+
+    const refreshStatus = async () => {
+      try {
+        const res = await fetch('/api/frames-status');
+        if (res.ok) {
+          const data = await res.json();
+          if (activeFramesCount) {
+            activeFramesCount.textContent = `${data.frameCount} Frames Extracted`;
+          }
+          if (sourceVideoName) {
+            sourceVideoName.textContent = data.manifest?.video || (data.videoExists ? 'hf_20261016_142815_403ea31a-8a9a-43a4-a7ff-2aa022b64a3f.mp4' : 'Kerala Walkthrough Frames');
+          }
+        }
+      } catch (e) {
+        if (activeFramesCount) activeFramesCount.textContent = 'Active (150 Frames)';
+      }
+    };
+
+    refreshStatus();
+
+    const uploadFile = (file) => {
+      if (!file) return;
+      if (progressWrap) progressWrap.style.display = 'block';
+      if (progressLabel) progressLabel.textContent = `Uploading ${file.name}...`;
+      if (progressBar) progressBar.style.width = '0%';
+      if (progressPercent) progressPercent.textContent = '0%';
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/upload-video', true);
+      xhr.setRequestHeader('x-filename', file.name);
+
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) {
+          const percent = Math.round((e.loaded / e.total) * 90);
+          if (progressBar) progressBar.style.width = `${percent}%`;
+          if (progressPercent) progressPercent.textContent = `${percent}%`;
+          if (percent >= 90 && progressLabel) {
+            progressLabel.textContent = 'Extracting frames with ffmpeg & updating landing page...';
+          }
+        }
+      };
+
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          if (progressBar) progressBar.style.width = '100%';
+          if (progressPercent) progressPercent.textContent = '100%';
+          if (progressLabel) progressLabel.textContent = 'Frames extracted successfully!';
+          setTimeout(() => {
+            if (window.reloadWalkthroughFrames) {
+              window.reloadWalkthroughFrames();
+            }
+            refreshStatus();
+            setTimeout(closeVideoModal, 1200);
+          }, 600);
+        } else {
+          try {
+            const err = JSON.parse(xhr.responseText);
+            if (progressLabel) progressLabel.textContent = `Error: ${err.error || 'Upload failed'}`;
+          } catch (e) {
+            if (progressLabel) progressLabel.textContent = 'Extraction failed. Check video format.';
+          }
+        }
+      };
+
+      xhr.onerror = () => {
+        if (progressLabel) progressLabel.textContent = 'Network error during upload.';
+      };
+
+      xhr.send(file);
+    };
+
+    window.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+    window.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+        const file = e.dataTransfer.files[0];
+        if (file.name.endsWith('.mp4') || file.type.startsWith('video/')) {
+          openVideoModal();
+          uploadFile(file);
+        }
+      }
+    });
+
+    if (dropzone) {
+      dropzone.addEventListener('click', () => fileInput && fileInput.click());
+      dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzone.style.borderColor = '#F2A24B';
+        dropzone.style.background = 'rgba(242, 162, 75, 0.08)';
+      });
+      dropzone.addEventListener('dragleave', () => {
+        dropzone.style.borderColor = 'rgba(242, 162, 75, 0.4)';
+        dropzone.style.background = 'rgba(242, 162, 75, 0.03)';
+      });
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.style.borderColor = 'rgba(242, 162, 75, 0.4)';
+        dropzone.style.background = 'rgba(242, 162, 75, 0.03)';
+        if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+          uploadFile(e.dataTransfer.files[0]);
+        }
+      });
+    }
+
+    if (fileInput) {
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files && fileInput.files.length > 0) {
+          uploadFile(fileInput.files[0]);
+        }
+      });
+    }
+
+    if (triggerBtn) {
+      triggerBtn.addEventListener('click', async () => {
+        triggerBtn.textContent = 'Extracting frames...';
+        triggerBtn.disabled = true;
+        try {
+          const res = await fetch('/api/trigger-extract', { method: 'POST' });
+          const data = await res.json();
+          if (data.ok) {
+            triggerBtn.textContent = 'Frames Extracted!';
+            if (window.reloadWalkthroughFrames) window.reloadWalkthroughFrames();
+            refreshStatus();
+            setTimeout(() => {
+              triggerBtn.textContent = 'Extract Frames from Current Project Video';
+              triggerBtn.disabled = false;
+              closeVideoModal();
+            }, 1200);
+          } else {
+            triggerBtn.textContent = data.error || 'Failed to extract';
+            setTimeout(() => {
+              triggerBtn.textContent = 'Extract Frames from Current Project Video';
+              triggerBtn.disabled = false;
+            }, 3000);
+          }
+        } catch (err) {
+          triggerBtn.textContent = 'Extraction trigger error';
+          setTimeout(() => {
+            triggerBtn.textContent = 'Extract Frames from Current Project Video';
+            triggerBtn.disabled = false;
+          }, 2500);
+        }
+      });
+    }
+
+    if (urlBtn && urlInput) {
+      urlBtn.addEventListener('click', async () => {
+        const url = urlInput.value.trim();
+        if (!url) return;
+        urlBtn.textContent = 'Fetching...';
+        urlBtn.disabled = true;
+        try {
+          const res = await fetch('/api/extract-url', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url }),
+          });
+          const data = await res.json();
+          if (data.ok) {
+            urlBtn.textContent = 'Done!';
+            if (window.reloadWalkthroughFrames) window.reloadWalkthroughFrames();
+            refreshStatus();
+            setTimeout(closeVideoModal, 1200);
+          } else {
+            urlBtn.textContent = 'Failed';
+            alert(data.error || 'Failed to fetch video');
+          }
+        } catch (err) {
+          urlBtn.textContent = 'Error';
+        } finally {
+          setTimeout(() => {
+            urlBtn.textContent = 'Fetch';
+            urlBtn.disabled = false;
+          }, 2000);
+        }
+      });
+    }
   }
 }

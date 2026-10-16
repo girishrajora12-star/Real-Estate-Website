@@ -56,15 +56,6 @@
           <li><a href="#about" class="nav-link">About</a></li>
         </ul>
       </nav>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <a href="/downloads/Google_AI_Studio_Architecture_Prompt.docx" download="Google_AI_Studio_Architecture_Prompt.docx" class="nav-doc-download" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: var(--color-cream); border-radius: 9999px; font-size: 12px; font-weight: 500; text-decoration: none; transition: all 0.25s ease;" title="Download Google Doc Master Prompt (.docx)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          <span>Prompt Doc</span>
-        </a>
         <button class="nav-cta" type="button">
           <span>Let's Talk</span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -92,60 +83,43 @@
 
         <!-- UI & Dynamic Chapter Overlays -->
         <div class="hero-ui-layer">
-          <div class="hero-top-meta">
-            <div class="hero-meta-stack">
-              <div>Interiors &bull; Exteriors &bull; Landscapes</div>
-              <div style="color: var(--color-amber);">&copy;2026 Atelier Kaval</div>
-            </div>
-          </div>
-
-          <!-- Dynamic Chapter Overlays triggered as video advances (12 Scenes in 2 lines, no subheading) -->
-          <!-- Dynamic Chapter Overlays triggered as video advances (Clean 2-line headings, no timestamps, no yellow labels) -->
-          <!-- Minimal Extraction Loading Indicator (Thin Bar) -->
-          <div class="hero-extract-loader" id="heroExtractLoader" aria-live="polite">
-            <div class="hero-extract-bar-track">
-              <div class="hero-extract-bar-fill" id="heroExtractFill"></div>
-            </div>
-            <span class="hero-extract-status" id="heroExtractStatus">Preparing Walkthrough...</span>
-          </div>
-
-          <!-- Synced Story Headings (1 line at a time, large heading with soft dark gradient) -->
+          <!-- Synced Story Headings (Clean 2 lines, no drop-shadow) -->
           <div class="hero-chapters-container" id="heroStoryContainer">
             <div class="hero-chapter active" data-index="0">
-              <h2 class="chapter-title">Home begins at the doorstep.</h2>
+              <h2 class="chapter-title">Home begins<br>at the doorstep.</h2>
             </div>
             <div class="hero-chapter" data-index="1">
-              <h2 class="chapter-title">Crafted in teak, built to welcome.</h2>
+              <h2 class="chapter-title">Crafted in teak,<br>built to welcome.</h2>
             </div>
             <div class="hero-chapter" data-index="2">
-              <h2 class="chapter-title">Bring the garden inside.</h2>
+              <h2 class="chapter-title">Bring the garden<br>inside.</h2>
             </div>
             <div class="hero-chapter" data-index="3">
-              <h2 class="chapter-title">Rooms that invite you to stay.</h2>
+              <h2 class="chapter-title">Rooms that invite<br>you to stay.</h2>
             </div>
             <div class="hero-chapter" data-index="4">
-              <h2 class="chapter-title">Long dinners. Open views.</h2>
+              <h2 class="chapter-title">Long dinners.<br>Open views.</h2>
             </div>
             <div class="hero-chapter" data-index="5">
-              <h2 class="chapter-title">Privacy, without closing off.</h2>
+              <h2 class="chapter-title">Privacy, without<br>closing off.</h2>
             </div>
             <div class="hero-chapter" data-index="6">
-              <h2 class="chapter-title">Stairs that feel like sculpture.</h2>
+              <h2 class="chapter-title">Stairs that feel<br>like sculpture.</h2>
             </div>
             <div class="hero-chapter" data-index="7">
-              <h2 class="chapter-title">Details with a story.</h2>
+              <h2 class="chapter-title">Details with<br>a story.</h2>
             </div>
             <div class="hero-chapter" data-index="8">
-              <h2 class="chapter-title">Every step softly lit.</h2>
+              <h2 class="chapter-title">Every step<br>softly lit.</h2>
             </div>
             <div class="hero-chapter" data-index="9">
-              <h2 class="chapter-title">Tradition on every wall.</h2>
+              <h2 class="chapter-title">Tradition on<br>every wall.</h2>
             </div>
             <div class="hero-chapter" data-index="10">
-              <h2 class="chapter-title">Slow down. Swing a little.</h2>
+              <h2 class="chapter-title">Slow down.<br>Swing a little.</h2>
             </div>
             <div class="hero-chapter" data-index="11">
-              <h2 class="chapter-title">Wake up above the treetops.</h2>
+              <h2 class="chapter-title">Wake up above<br>the treetops.</h2>
             </div>
           </div>
 
@@ -154,24 +128,10 @@
             <!-- Left spacer (social icons removed per brief) -->
             <div class="hero-social-col"></div>
 
-            <!-- Bottom Center: Rotating Scroll Badge -->
-            <a href="#spaces" class="hero-scroll-indicator" aria-label="Scroll to explore">
-              <div class="badge-wrapper">
-                <svg class="rotating-circle-svg" viewBox="0 0 100 100">
-                  <path id="circlePath" d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="none"/>
-                  <text fill="rgba(255,255,255,0.85)" font-size="8.8" font-family="'degular', sans-serif" font-weight="400" letter-spacing="2.2">
-                    <textPath href="#circlePath">SCROLL TO WALK THROUGH &bull; FRAME BY FRAME &bull; </textPath>
-                  </text>
-                </svg>
-                <svg class="badge-center-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <polyline points="19 12 12 19 5 12"></polyline>
-                </svg>
-              </div>
-            </a>
+
 
             <!-- Bottom Right: Descriptor Paragraph -->
-            <div class="hero-desc-wrap">
+           <!--  <div class="hero-desc-wrap">
               <p class="hero-desc-text">
                 Crafting warm architectural sanctuaries where raw timber, monolithic stone, and natural light converge into timeless living experiences.
               </p>
@@ -659,6 +619,79 @@
           </div>
           <button class="form-submit-btn" type="submit">Submit Inquiry</button>
         </form>
+      </div>
+    <!-- Walkthrough Video Frame Manager Modal -->
+    <div class="video-modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(14, 13, 11, 0.85); backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 20px;">
+      <div style="background: #1A1916; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 20px; width: 100%; max-width: 580px; padding: 32px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); color: #F3EFE6;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+          <div>
+            <span style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #F2A24B; font-weight: 600;">HERO WALKTHROUGH</span>
+            <h3 id="videoModalTitle" style="font-size: 24px; font-weight: 500; margin-top: 4px; color: #FFFFFF;">Walkthrough Video &amp; Frames</h3>
+          </div>
+          <button id="closeVideoModalBtn" type="button" aria-label="Close dialog" style="background: rgba(255, 255, 255, 0.08); border: none; color: #FFF; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <p style="font-size: 14px; color: #A6A095; line-height: 1.6; margin-bottom: 24px;">
+          Select your generated video (<code style="color: #F2A24B; background: rgba(242, 162, 75, 0.1); padding: 2px 6px; border-radius: 4px;">hf_20261016_142815_403ea31a-8a9a-43a4-a7ff-2aa022b64a3f.mp4</code>). It will instantly clear previous frames, extract crisp frame-by-frame JPEGs with ffmpeg, and stream them into the landing page scrub!
+        </p>
+
+        <!-- Current Status Banner -->
+        <div id="videoStatusBanner" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <span style="color: #A6A095;">Active Frames:</span>
+            <span id="activeFramesCount" style="color: #F2A24B; font-weight: 600;">Loading...</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: #A6A095;">Source Video:</span>
+            <span id="sourceVideoName" style="color: #FFF;">Checking...</span>
+          </div>
+        </div>
+
+        <!-- Dropzone / File input -->
+        <div id="videoDropzone" style="border: 2px dashed rgba(242, 162, 75, 0.4); background: rgba(242, 162, 75, 0.03); border-radius: 16px; padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.2s ease; margin-bottom: 20px;">
+          <input type="file" id="videoFileInput" accept=".mp4,video/*" style="display: none;" />
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#F2A24B" stroke-width="1.8" style="margin: 0 auto 12px auto; display: block;">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <div style="font-weight: 500; font-size: 15px; margin-bottom: 4px; color: #FFFFFF;">
+            Click to Browse or Drag &amp; Drop Video Here
+          </div>
+          <div style="font-size: 12px; color: #A6A095;">
+            Supports <strong style="color: #F2A24B;">hf_20261016_142815_403ea31a-8a9a-43a4-a7ff-2aa022b64a3f.mp4</strong> or any .mp4 file
+          </div>
+        </div>
+
+        <!-- Upload Progress Bar -->
+        <div id="videoUploadProgressWrap" style="display: none; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
+            <span id="videoProgressLabel" style="color: #F2A24B;">Uploading &amp; Extracting...</span>
+            <span id="videoProgressPercent" style="color: #FFF;">0%</span>
+          </div>
+          <div style="height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 999px; overflow: hidden;">
+            <div id="videoProgressBar" style="height: 100%; width: 0%; background: #F2A24B; transition: width 0.2s ease;"></div>
+          </div>
+        </div>
+
+        <!-- Extract Existing Button & Alternative URL -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <button id="triggerExtractBtn" type="button" style="width: 100%; padding: 12px 18px; background: #F2A24B; border: none; border-radius: 12px; color: #0E0D0B; font-weight: 600; font-size: 14px; cursor: pointer; transition: opacity 0.2s ease;">
+            Extract Frames from Current Project Video
+          </button>
+          
+          <div style="display: flex; gap: 8px;">
+            <input type="url" id="videoUrlInput" placeholder="Or paste video download URL..." style="flex: 1; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; padding: 10px 14px; color: #FFF; font-size: 13px;" />
+            <button id="extractUrlBtn" type="button" style="padding: 10px 16px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 10px; color: #FFF; font-size: 13px; font-weight: 500; cursor: pointer;">
+              Fetch
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
