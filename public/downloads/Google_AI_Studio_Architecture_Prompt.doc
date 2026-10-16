@@ -1,0 +1,304 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset='utf-8'>
+<title>Google AI Studio Master Prompt &amp; Video Reference Guide</title>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1a1a1a;
+    line-height: 1.6;
+    margin: 40px;
+    background-color: #ffffff;
+  }
+  h1 {
+    font-size: 26pt;
+    color: #101010;
+    margin-bottom: 4px;
+    font-weight: 700;
+    border-bottom: 2px solid #F2A24B;
+    padding-bottom: 8px;
+  }
+  .subtitle {
+    font-size: 13pt;
+    color: #8A4B22;
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+  h2 {
+    font-size: 16pt;
+    color: #101010;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e0ded8;
+  }
+  h3 {
+    font-size: 13pt;
+    color: #333333;
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+  p, li {
+    font-size: 11pt;
+    color: #2b2b2b;
+  }
+  .callout {
+    background-color: #fbf9f4;
+    border-left: 4px solid #F2A24B;
+    padding: 14px 18px;
+    margin: 18px 0;
+    border-radius: 4px;
+  }
+  .prompt-box {
+    background-color: #0f1115;
+    color: #f4efe6;
+    padding: 20px 24px;
+    border-radius: 8px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 10pt;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+    border: 1px solid #333;
+    margin: 20px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 10.5pt;
+  }
+  th, td {
+    border: 1px solid #dcd7cc;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  th {
+    background-color: #f5f2ea;
+    font-weight: 700;
+    color: #111;
+  }
+  tr:nth-child(even) {
+    background-color: #faf8f5;
+  }
+  .badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 9pt;
+    font-weight: bold;
+    background-color: #F2A24B;
+    color: #000;
+  }
+</style>
+</head>
+<body>
+
+<h1>Google AI Studio Master Prompt &amp; Video Reference</h1>
+<p class='subtitle'>KAVAL Architecture &amp; Interiors &bull; Frame-by-Frame Scroll Walkthrough Blueprint</p>
+
+<div class='callout'>
+  <strong>How to open in Google Docs:</strong><br>
+  1. Go to <strong>drive.google.com</strong> or <strong>docs.google.com</strong>.<br>
+  2. Click <strong>+ New &gt; File upload</strong> and select this file.<br>
+  3. Open the uploaded file in Google Docs &mdash; all formatting, headings, and prompt text will be perfectly preserved.
+</div>
+
+<h2>Part 1: Video Reference Specifications</h2>
+<p>This section documents the exact video file and timeline breakdown used for the hero scroll-scrubbed walkthrough on the landing page.</p>
+
+<table>
+  <tr>
+    <th style="width: 25%;">Property</th>
+    <th>Specification</th>
+  </tr>
+  <tr>
+    <td><strong>File Name</strong></td>
+    <td><code>House Walkthrough Website.mp4</code></td>
+  </tr>
+  <tr>
+    <td><strong>Storage Location</strong></td>
+    <td><code>public/assets/House Walkthrough Website.mp4</code></td>
+  </tr>
+  <tr>
+    <td><strong>Duration</strong></td>
+    <td>20.065 seconds</td>
+  </tr>
+  <tr>
+    <td><strong>Resolution</strong></td>
+    <td>1918 x 1080 (Full HD Landscape)</td>
+  </tr>
+  <tr>
+    <td><strong>Extracted Frames Target</strong></td>
+    <td>300 frames (15 frames/sec) saved as <code>public/assets/frames/frame_0001.jpg</code> ... <code>frame_0300.jpg</code></td>
+  </tr>
+  <tr>
+    <td><strong>Hero Pin Distance</strong></td>
+    <td>400% of viewport scroll (GSAP ScrollTrigger pin)</td>
+  </tr>
+</table>
+
+<h3>Timeline &amp; Scene Breakdown (12 Chapters)</h3>
+<table>
+  <tr>
+    <th style="width: 15%;">Timestamp</th>
+    <th style="width: 35%;">Room / Camera Perspective</th>
+    <th>Editorial Chapter Overlay (2 Lines)</th>
+  </tr>
+  <tr>
+    <td><strong>00:00 - 01:80</strong></td>
+    <td>Exterior villa approach, golden hour facade and entry portico</td>
+    <td>Where tradition<br>meets modern living.</td>
+  </tr>
+  <tr>
+    <td><strong>01:80 - 03:40</strong></td>
+    <td>Solid Indonesian teak double pivot door opening</td>
+    <td>Step through<br>solid teak.</td>
+  </tr>
+  <tr>
+    <td><strong>03:40 - 05:20</strong></td>
+    <td>Entry foyer with warm ambient natural lighting</td>
+    <td>Warm light<br>greets you.</td>
+  </tr>
+  <tr>
+    <td><strong>05:20 - 07:00</strong></td>
+    <td>Formal living sanctuary with monolithic stone feature wall</td>
+    <td>Space made<br>for family.</td>
+  </tr>
+  <tr>
+    <td><strong>07:00 - 08:80</strong></td>
+    <td>Open dining space with handcrafted teak dining table</td>
+    <td>Where every meal<br>gathers you.</td>
+  </tr>
+  <tr>
+    <td><strong>08:80 - 10:60</strong></td>
+    <td>Internal daylight courtyard with natural cross-ventilation</td>
+    <td>Light, open<br>and effortless.</td>
+  </tr>
+  <tr>
+    <td><strong>10:60 - 12:40</strong></td>
+    <td>Floating architectural staircase with glass balustrade</td>
+    <td>Rise through<br>glass and wood.</td>
+  </tr>
+  <tr>
+    <td><strong>12:40 - 14:20</strong></td>
+    <td>Mezzanine walkway looking down into double-height void</td>
+    <td>See your home<br>from above.</td>
+  </tr>
+  <tr>
+    <td><strong>14:20 - 16:00</strong></td>
+    <td>Upper quiet retreat, study library and seating nook</td>
+    <td>A quiet corner,<br>upstairs.</td>
+  </tr>
+  <tr>
+    <td><strong>16:00 - 17:80</strong></td>
+    <td>Private residential hallway with discrete flush doors</td>
+    <td>Private spaces,<br>thoughtfully placed.</td>
+  </tr>
+  <tr>
+    <td><strong>17:80 - 19:20</strong></td>
+    <td>Master suite sanctuary bathed in soft morning clarity</td>
+    <td>Wake up<br>to calm.</td>
+  </tr>
+  <tr>
+    <td><strong>19:20 - 20:06</strong></td>
+    <td>Sunset balcony terrace with panoramic tropical horizon</td>
+    <td>End every day<br>with this view.</td>
+  </tr>
+</table>
+
+<h2>Part 2: Complete Single-Turn Google AI Studio Master Prompt</h2>
+<p>Copy and paste the entire block below into Google AI Studio Build to generate the complete website:</p>
+
+<div class='prompt-box'>Build a luxury, cinematic architectural showcase web application named &quot;KAVAL Architecture &amp; Interiors&quot;. The core signature feature of the website is a scroll-controlled frame-by-frame villa walkthrough on the landing page hero, accompanied by editorial typography, smooth inertial scroll interactions, and interactive project inspection.
+
+1. TYPOGRAPHY &amp; STYLING THEME
+- Font Integration: Integrate Adobe Typekit font Degular via:
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://use.typekit.net/rug2hhm.css&quot;&gt;
+- Font Family: font-family: &#x27;degular&#x27;, sans-serif;
+- Typographic Hierarchy:
+  * Big headings (h1, h2, hero chapters, section headlines, preloader, CTA titles): font-family: &#x27;degular&#x27;, sans-serif; font-weight: 500; font-style: normal; (Medium).
+  * Small headings (h3-h6, card titles, project titles, modal titles, footer titles, kickers): font-family: &#x27;degular&#x27;, sans-serif; font-weight: 400; font-style: normal; (Regular).
+  * Body copy, descriptions, navigation links, buttons, form inputs: font-family: &#x27;degular&#x27;, sans-serif; font-weight: 400; font-style: normal;.
+- Color Palette:
+  * Deep Charcoal: #101010 (Hero, projects, and footer background)
+  * Warm Architectural Cream: #F3EFE6 (Intro cards section background)
+  * Raw Teak Accent: #8A4B22 / #A85A28
+  * Radiant Amber: #F2A24B (Accents, highlights, active states)
+  * Pure White: #FFFFFF
+  * Muted Slate: #8E8A82
+- Global Feel: High-end editorial, generous whitespace, zero pill-shaped AI slop, subtle 1px translucent borders (rgba(255, 255, 255, 0.08)), bespoke custom cursor with difference blend mode.
+
+2. VIDEO WALKTHROUGH LANDING PAGE (SECTION 1)
+- Asset: Uses &quot;public/assets/House Walkthrough Website.mp4&quot; (~20s 1080p architectural villa walkthrough).
+- Extraction Pipeline:
+  * Provide a Python script (scripts/extract_frames.py) using ffmpeg to extract ~300 high-resolution JPEG frames into public/assets/frames/frame_0001.jpg to frame_0300.jpg, scaling to 1080p and saving a manifest.json.
+  * Connect a Vite build plugin in vite.config.ts to automatically trigger extraction on server boot if frames do not yet exist.
+- Canvas Scroll Scrubbing:
+  * The hero section takes 100vw and 100vh and is pinned for 400% scroll distance using GSAP ScrollTrigger.
+  * An HTML5 &lt;canvas id=&quot;heroCanvas&quot;&gt; scales to device pixel ratio and renders frames using aspect-ratio cover math.
+  * Frame 1 is loaded and painted immediately on page load to eliminate blank states.
+  * Progressive background preloading buffers every 3rd frame first, then fills in remaining frames during browser idle time.
+  * A tick() animation loop applies smoothing interpolation between scroll position and target frame index.
+  * No Video Selector / Upload UI: Do not display any video selector buttons, file input pickers, or dropzone overlays on the landing page. The site immediately and automatically scrubs the extracted frames.
+- Dynamic Chapters:
+  * As the video advances, 12 minimalist two-line editorial chapter headlines fade in and out at key timestamps:
+    1. 0.0s: &quot;Where tradition / meets modern living.&quot;
+    2. 1.8s: &quot;Step through / solid teak.&quot;
+    3. 3.4s: &quot;Warm light / greets you.&quot;
+    4. 5.2s: &quot;Space made / for family.&quot;
+    5. 7.0s: &quot;Where every meal / gathers you.&quot;
+    6. 8.8s: &quot;Light, open / and effortless.&quot;
+    7. 10.6s: &quot;Rise through / glass and wood.&quot;
+    8. 12.4s: &quot;See your home / from above.&quot;
+    9. 14.2s: &quot;A quiet corner, / upstairs.&quot;
+    10. 16.0s: &quot;Private spaces, / thoughtfully placed.&quot;
+    11. 17.8s: &quot;Wake up / to calm.&quot;
+    12. 19.2s: &quot;End every day / with this view.&quot;
+- Hero Metadata &amp; Indicator:
+  * Vertical scrub progress bar on the right.
+  * Circular rotating SVG badge: &quot;SCROLL TO WALK THROUGH • FRAME BY FRAME • &quot;.
+  * Upon reaching 100% of the video walkthrough, Section 1 unpins seamlessly into Section 2 with 0px gap.
+
+3. SUBSEQUENT INTERACTIVE SECTIONS
+- Section 2: Spaces &amp; Materiality
+  * Warm cream background #F3EFE6 with charcoal text.
+  * Split headline reveal: &quot;Homes. Spaces. Stories. Details.&quot;
+  * Search filter input to dynamically filter cards by room or material (e.g. Living, Teak, Courtyard).
+  * 4 Parallax floating room cards (Living Sanctuary, Courtyard Atrium, Floating Mezzanine, Master Suite) with interactive heart favorite toggles and modal detail triggers.
+- Section 3: Kerala Contemporary Villa 3D Elevation
+  * Full-width architectural exterior render background.
+  * Heading: &quot;Stunning Double Floor 3D Elevation&quot; in pure black (#000000) with Degular Medium (500).
+  * Subheading: &quot;Click on any architectural detail to inspect craftsmanship &amp; material specifications.&quot; in pure black (#000000) with Degular Regular (400).
+  * No top category kicker text.
+  * 3 Pulsing interactive glassmorphism tags (Teak wood cladding, Smart climate architecture, Warm pendant illumination) that trigger a side inspection modal with material specs and origin data.
+- Section 4: Architectural Index / Projects
+  * Minimalist numbered row list (/01 Kerala Villa, /02 Uluwatu Cliff House, /03 Kyoto Timber Pavilion).
+  * Hovering a row smoothly expands a floating elevation thumbnail and reveals /See more.
+- Section 5: The Architectural Process
+  * 4 Horizontal step cards (Site &amp; Microclimate Analysis, Monolithic Concept Modelling, Material &amp; Joinery Craftsmanship, Turnkey Execution).
+- Section 6: Footer &amp; Commission Inquiry
+  * Infinite animated marquee of design disciplines.
+  * Big headline: &quot;Have an architectural dream?&quot; with magnetic circular CTA button &quot;Start Commission&quot;.
+  * Accessible dialog modal with inquiry form (Full Name, Email, Site Location, Architectural Brief).
+
+4. TECHNICAL STACK &amp; DEPENDENCIES
+- React + Vite + TypeScript (or vanilla HTML5/JS with GSAP).
+- GSAP 3 + ScrollTrigger for scroll pinning and timeline orchestration.
+- Tailwind CSS 4 for styling utilities.
+- Clean modular codebase, zero console warnings, fast first contentful paint.</div>
+
+<h2>Part 3: Quick Instructions for Google AI Studio Build</h2>
+<ol>
+  <li><strong>Start Project</strong>: Open Google AI Studio Build (<a href="https://aistudio.google.com/">aistudio.google.com</a>) and click <em>Create Applet</em>.</li>
+  <li><strong>Paste Master Prompt</strong>: Paste the prompt from Part 2 into the prompt bar.</li>
+  <li><strong>Provide Video</strong>: Place <code>House Walkthrough Website.mp4</code> into <code>public/assets/</code>.</li>
+  <li><strong>Run</strong>: The build engine will assemble the application, extract frames, configure the Degular font, and render the interactive architectural showcase.</li>
+</ol>
+
+<hr style="border: none; border-top: 1px solid #e0ded8; margin: 40px 0 20px;">
+<p style="font-size: 9.5pt; color: #8E8A82; text-align: center;">KAVAL Architecture &amp; Interiors &bull; Generated for Google AI Studio Build &bull; 2026</p>
+
+</body>
+</html>

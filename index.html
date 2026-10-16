@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KAVAL Architecture & Interiors</title>
+    <meta name="description" content="A cinematic architecture and interior design showcase featuring smooth inertial scrolling, layered parallax hero, and scroll-controlled villa walkthrough." />
+    <meta property="og:title" content="KAVAL Architecture & Interiors" />
+    <meta property="og:description" content="A cinematic architecture and interior design showcase featuring smooth inertial scrolling, layered parallax hero, and scroll-controlled villa walkthrough." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Adobe Typekit Font: Degular (Regular 400 & Medium 500) -->
+    <link rel="stylesheet" href="https://use.typekit.net/rug2hhm.css">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <!-- Custom Cursor with difference blend & dynamic label -->
+    <div class="custom-cursor">
+      <span class="cursor-label">VIEW</span>
+    </div>
+
+    <!-- Preloader with 0-100 Counter -->
+    <div class="preloader">
+      <div class="preloader-top">
+        <span>KAVAL ATELIER</span>
+        <span>RESIDENTIAL ARCHITECTURE &copy;2026</span>
+      </div>
+      <div class="preloader-center">
+        <h1 class="preloader-title">KAVAL</h1>
+        <p class="preloader-sub">SANCTUARY &bull; TIMBER &bull; LIGHT</p>
+      </div>
+      <div class="preloader-bottom">
+        <div>
+          <div class="preloader-bar-wrap">
+            <div class="preloader-bar"></div>
+          </div>
+          <span style="font-size: 11px; letter-spacing: 0.15em; color: #8E8A82; text-transform: uppercase;">CALIBRATING WALKTHROUGH</span>
+        </div>
+        <div class="preloader-counter">00</div>
+      </div>
+    </div>
+
+    <!-- Fixed Floating Pill Nav -->
+    <header class="floating-nav">
+      <a href="#hero" class="nav-brand">KAVAL</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link">Walkthrough</a></li>
+          <li><a href="#spaces" class="nav-link">Spaces</a></li>
+          <li><a href="#journal" class="nav-link">Villa Elevation</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#process" class="nav-link">Process</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="/downloads/Google_AI_Studio_Architecture_Prompt.docx" download="Google_AI_Studio_Architecture_Prompt.docx" class="nav-doc-download" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: var(--color-cream); border-radius: 9999px; font-size: 12px; font-weight: 500; text-decoration: none; transition: all 0.25s ease;" title="Download Google Doc Master Prompt (.docx)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Prompt Doc</span>
+        </a>
+        <button class="nav-cta" type="button">
+          <span>Let's Talk</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Container with Native Scrolling -->
+    <main id="main-content">
+
+      <!-- ===================================================================
+           SECTION 1: HERO WALKTHROUGH (FIRST SECTION)
+           Video frames scrubbed on HTML5 Canvas while the user scrolls.
+           No autoplay: strictly advances on scroll!
+           =================================================================== -->
+      <section class="hero-walkthrough-section" id="hero">
+        <!-- Background Frame-By-Frame Canvas for Scroll Walkthrough -->
+        <div class="hero-video-wrapper">
+          <canvas id="heroCanvas" class="hero-bg-canvas"></canvas>
+          <div class="hero-video-scrim"></div>
+        </div>
+
+        <!-- UI & Dynamic Chapter Overlays -->
+        <div class="hero-ui-layer">
+          <div class="hero-top-meta">
+            <div class="hero-meta-stack">
+              <div>Interiors &bull; Exteriors &bull; Landscapes</div>
+              <div style="color: var(--color-amber);">&copy;2026 Atelier Kaval</div>
+            </div>
+          </div>
+
+          <!-- Dynamic Chapter Overlays triggered as video advances (12 Scenes in 2 lines, no subheading) -->
+          <!-- Dynamic Chapter Overlays triggered as video advances (Clean 2-line headings, no timestamps, no yellow labels) -->
+          <!-- Minimal Extraction Loading Indicator (Thin Bar) -->
+          <div class="hero-extract-loader" id="heroExtractLoader" aria-live="polite">
+            <div class="hero-extract-bar-track">
+              <div class="hero-extract-bar-fill" id="heroExtractFill"></div>
+            </div>
+            <span class="hero-extract-status" id="heroExtractStatus">Preparing Walkthrough...</span>
+          </div>
+
+          <!-- Synced Story Headings (1 line at a time, large heading with soft dark gradient) -->
+          <div class="hero-chapters-container" id="heroStoryContainer">
+            <div class="hero-chapter active" data-index="0">
+              <h2 class="chapter-title">Home begins at the doorstep.</h2>
+            </div>
+            <div class="hero-chapter" data-index="1">
+              <h2 class="chapter-title">Crafted in teak, built to welcome.</h2>
+            </div>
+            <div class="hero-chapter" data-index="2">
+              <h2 class="chapter-title">Bring the garden inside.</h2>
+            </div>
+            <div class="hero-chapter" data-index="3">
+              <h2 class="chapter-title">Rooms that invite you to stay.</h2>
+            </div>
+            <div class="hero-chapter" data-index="4">
+              <h2 class="chapter-title">Long dinners. Open views.</h2>
+            </div>
+            <div class="hero-chapter" data-index="5">
+              <h2 class="chapter-title">Privacy, without closing off.</h2>
+            </div>
+            <div class="hero-chapter" data-index="6">
+              <h2 class="chapter-title">Stairs that feel like sculpture.</h2>
+            </div>
+            <div class="hero-chapter" data-index="7">
+              <h2 class="chapter-title">Details with a story.</h2>
+            </div>
+            <div class="hero-chapter" data-index="8">
+              <h2 class="chapter-title">Every step softly lit.</h2>
+            </div>
+            <div class="hero-chapter" data-index="9">
+              <h2 class="chapter-title">Tradition on every wall.</h2>
+            </div>
+            <div class="hero-chapter" data-index="10">
+              <h2 class="chapter-title">Slow down. Swing a little.</h2>
+            </div>
+            <div class="hero-chapter" data-index="11">
+              <h2 class="chapter-title">Wake up above the treetops.</h2>
+            </div>
+          </div>
+
+          <!-- Bottom Grid -->
+          <div class="hero-bottom-grid">
+            <!-- Left spacer (social icons removed per brief) -->
+            <div class="hero-social-col"></div>
+
+            <!-- Bottom Center: Rotating Scroll Badge -->
+            <a href="#spaces" class="hero-scroll-indicator" aria-label="Scroll to explore">
+              <div class="badge-wrapper">
+                <svg class="rotating-circle-svg" viewBox="0 0 100 100">
+                  <path id="circlePath" d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="none"/>
+                  <text fill="rgba(255,255,255,0.85)" font-size="8.8" font-family="'degular', sans-serif" font-weight="400" letter-spacing="2.2">
+                    <textPath href="#circlePath">SCROLL TO WALK THROUGH &bull; FRAME BY FRAME &bull; </textPath>
+                  </text>
+                </svg>
+                <svg class="badge-center-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+              </div>
+            </a>
+
+            <!-- Bottom Right: Descriptor Paragraph -->
+            <div class="hero-desc-wrap">
+              <p class="hero-desc-text">
+                Crafting warm architectural sanctuaries where raw timber, monolithic stone, and natural light converge into timeless living experiences.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Edge Vertical Progress Bar -->
+        <div class="hero-progress-track">
+          <div class="hero-progress-fill"></div>
+        </div>
+      </section>
+
+
+      <!-- ===================================================================
+           SECTION 2: INTRO + FLOATING CARDS (Directly follows Section 1)
+           Revealed immediately with 0px gap once the video finishes.
+           Warm Cream Background #F3EFE6
+           =================================================================== -->
+      <section class="intro-cards-section" id="spaces">
+        <div class="intro-cards-grid">
+          <!-- Left Column -->
+          <div class="intro-left-col">
+            <span class="section-kicker">GET INSPIRED</span>
+            <h2 class="intro-headline">
+              <span class="line-wrap"><span class="line">Homes &amp; Spaces.</span></span>
+              <span class="line-wrap"><span class="line font-serif-italic text-amber">Stories &amp; Details.</span></span>
+            </h2>
+            <p class="intro-body-copy">
+              We design residences that celebrate raw materials in their purest states. Every timber grain, stone seam, and natural shadow is choreographed to bring stillness to daily life.
+            </p>
+
+            <!-- Pill-shaped search input -->
+            <div class="search-pill-box">
+              <input type="text" class="search-pill-input" placeholder="Search a style, room or material..." aria-label="Search curated spaces" />
+              <button class="search-pill-btn" type="button" aria-label="Search">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: 4 Tilted Floating Cards (Real Architecture Photography) -->
+          <div class="cards-right-col">
+            <!-- Card 1 -->
+            <div class="floating-room-card" data-cursor="view">
+              <div class="card-img-wrap">
+                <img src="/assets/rooms/living.jpg" alt="Teak Living Room" loading="lazy" />
+                <button class="card-favorite-btn" type="button" aria-label="Favorite space">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-info">
+                <h3 class="card-title">Teak Living Room</h3>
+                <div class="card-meta">Courtyard view &bull; 2,400 sq ft &bull; Natural stone</div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="floating-room-card" data-cursor="view">
+              <div class="card-img-wrap">
+                <img src="/assets/rooms/courtyard.jpg" alt="Courtyard Atrium" loading="lazy" />
+                <button class="card-favorite-btn" type="button" aria-label="Favorite space">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-info">
+                <h3 class="card-title">Courtyard Atrium</h3>
+                <div class="card-meta">Open sky &bull; Banana palms &bull; Polished marble</div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="floating-room-card" data-cursor="view">
+              <div class="card-img-wrap">
+                <img src="/assets/rooms/staircase.jpg" alt="Floating Staircase" loading="lazy" />
+                <button class="card-favorite-btn" type="button" aria-label="Favorite space">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-info">
+                <h3 class="card-title">Floating Staircase</h3>
+                <div class="card-meta">Solid teak treads &bull; Glass balustrade &bull; Amber globes</div>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="floating-room-card" data-cursor="view">
+              <div class="card-img-wrap">
+                <img src="/assets/rooms/bedroom.jpg" alt="Master Suite Sanctuary" loading="lazy" />
+                <button class="card-favorite-btn" type="button" aria-label="Favorite space">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-info">
+                <h3 class="card-title">Master Suite Sanctuary</h3>
+                <div class="card-meta">Garden terrace &bull; Fluted timber &bull; Linen textiles</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================================================================
+           SECTION 3: KERALA CONTEMPORARY VILLA 3D ELEVATION STILL WITH INTERACTIVE POPOVERS
+           =================================================================== -->
+      <section class="dusk-section" id="journal">
+        <div class="dusk-image-wrapper">
+          <img class="dusk-image" src="/assets/Kerala Contemporary Villa _ Stunning Double Floor 3D Elevation Under Budget.jpeg" alt="Kerala Contemporary Villa - Stunning Double Floor 3D Elevation Under Budget" loading="lazy" />
+        </div>
+
+        <div class="dusk-overlay-header">
+          <h2 class="dusk-title" style="color: #000000;">Stunning Double Floor 3D Elevation</h2>
+          <p class="dusk-subtitle" style="color: #000000;">Click on any architectural detail to inspect craftsmanship &amp; material specifications.</p>
+        </div>
+
+        <!-- Floating Glassmorphism Tag 1: Teak wood cladding -->
+        <button class="dusk-tag tag-pos-1 feature-tag-btn" type="button" data-feature="teak-cladding" aria-label="Explore Teak wood cladding">
+          <svg class="dusk-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          <span>Teak wood cladding</span>
+          <span class="tag-indicator-dot"></span>
+        </button>
+
+        <!-- Floating Glassmorphism Tag 2: Smart climate -->
+        <button class="dusk-tag tag-pos-2 feature-tag-btn" type="button" data-feature="smart-climate" aria-label="Explore Smart climate">
+          <svg class="dusk-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          <span>Smart climate</span>
+          <span class="tag-indicator-dot"></span>
+        </button>
+
+        <!-- Floating Glassmorphism Tag 3: Warm pendant lighting -->
+        <button class="dusk-tag tag-pos-3 feature-tag-btn" type="button" data-feature="warm-lighting" aria-label="Explore Warm pendant lighting">
+          <svg class="dusk-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18h6"></path>
+            <path d="M10 22h4"></path>
+            <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+          </svg>
+          <span>Warm pendant lighting</span>
+          <span class="tag-indicator-dot"></span>
+        </button>
+      </section>
+
+
+      <!-- ===================================================================
+           SECTION 4: PROJECT LIST (Charcoal Background)
+           Inline thumbnail expanding inside title on hover
+           =================================================================== -->
+      <section class="project-list-section" id="projects">
+        <div class="project-top-row">
+          <div class="project-top-left">/Our Services</div>
+          <div class="project-top-center">What we do (and do really well)</div>
+        </div>
+
+        <div class="project-items-wrapper">
+          <!-- Project Row 1 -->
+          <div class="project-row" data-cursor="view">
+            <div class="project-row-main">
+              <span class="project-index">/01</span>
+              <h3 class="project-title-lockup">
+                <span>Kerala</span>
+                <span class="project-inline-thumb">
+                  <img src="/assets/Kerala Contemporary Villa _ Stunning Double Floor 3D Elevation Under Budget.jpeg" alt="Kerala Contemporary Villa preview" />
+                </span>
+                <span>Villa</span>
+              </h3>
+              <span class="project-see-more">/See more</span>
+            </div>
+            <div class="project-row-preview">
+              <span class="project-preview-caption">Bali, Indonesia &bull; 6,800 sq ft &bull; Completed 2025</span>
+            </div>
+          </div>
+
+          <!-- Project Row 2 -->
+          <div class="project-row" data-cursor="view">
+            <div class="project-row-main">
+              <span class="project-index">/02</span>
+              <h3 class="project-title-lockup">
+                <span>Courtyard</span>
+                <span class="project-inline-thumb">
+                  <img src="/assets/projects/p2.jpg" alt="Courtyard Residence preview" />
+                </span>
+                <span>Residence</span>
+              </h3>
+              <span class="project-see-more">/See more</span>
+            </div>
+            <div class="project-row-preview">
+              <span class="project-preview-caption">Kyoto, Japan &bull; 4,200 sq ft &bull; Completed 2025</span>
+            </div>
+          </div>
+
+          <!-- Project Row 3 -->
+          <div class="project-row" data-cursor="view">
+            <div class="project-row-main">
+              <span class="project-index">/03</span>
+              <h3 class="project-title-lockup">
+                <span>Stone</span>
+                <span class="project-inline-thumb">
+                  <img src="/assets/projects/p3.jpg" alt="Stone & Light preview" />
+                </span>
+                <span>&amp; Light</span>
+              </h3>
+              <span class="project-see-more">/See more</span>
+            </div>
+            <div class="project-row-preview">
+              <span class="project-preview-caption">Lugano, Switzerland &bull; 5,900 sq ft &bull; Completed 2024</span>
+            </div>
+          </div>
+
+          <!-- Project Row 4 -->
+          <div class="project-row" data-cursor="view">
+            <div class="project-row-main">
+              <span class="project-index">/04</span>
+              <h3 class="project-title-lockup">
+                <span>Pendant</span>
+                <span class="project-inline-thumb">
+                  <img src="/assets/projects/p4.jpg" alt="Pendant Villa preview" />
+                </span>
+                <span>Villa</span>
+              </h3>
+              <span class="project-see-more">/See more</span>
+            </div>
+            <div class="project-row-preview">
+              <span class="project-preview-caption">Byron Bay, Australia &bull; 7,400 sq ft &bull; Completed 2026</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================================================================
+           SECTION 5: PROCESS (Pinned Horizontal Scroll - 4 Points Only)
+           After 4th point, unpins cleanly into the Section 6 Footer CTA
+           =================================================================== -->
+      <section class="process-pinned-container" id="process">
+        <div class="process-track">
+          <!-- Step 1: Consultation -->
+          <div class="process-panel">
+            <div class="process-text-col">
+              <div class="process-step-num">01</div>
+              <h3 class="process-step-title">Vision &amp; Site Orientation</h3>
+              <p class="process-step-desc">
+                We spend days on the raw land analyzing sun trajectories, micro-breezes, and topography before sketching a single line. The residence is oriented around the sun and trees.
+              </p>
+              <div class="process-step-pills">
+                <span class="process-pill">Solar Mapping</span>
+                <span class="process-pill">Material Sourcing</span>
+                <span class="process-pill">Client Workshop</span>
+              </div>
+            </div>
+            <div class="process-img-col">
+              <img src="/assets/rooms/courtyard.jpg" alt="Consultation and site mapping" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Step 2: Concept -->
+          <div class="process-panel">
+            <div class="process-text-col">
+              <div class="process-step-num">02</div>
+              <h3 class="process-step-title">Architectural Volume &amp; Light</h3>
+              <p class="process-step-desc">
+                Iterative massing models exploring double-height voids, breezeways, and concealed lighting. We balance dramatic proportions with tactile human intimacy.
+              </p>
+              <div class="process-step-pills">
+                <span class="process-pill">3D Daylight Simulation</span>
+                <span class="process-pill">Thermal Circulation</span>
+                <span class="process-pill">Scale Prototyping</span>
+              </div>
+            </div>
+            <div class="process-img-col">
+              <img src="/assets/rooms/living.jpg" alt="Concept prototyping" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Step 3: Build -->
+          <div class="process-panel">
+            <div class="process-text-col">
+              <div class="process-step-num">03</div>
+              <h3 class="process-step-title">Artisanal Craft &amp; Timber Joinery</h3>
+              <p class="process-step-desc">
+                Our master carpenters hand-plane reclaimed teak and volcanic stone blocks on site. Every joint is mortised with zero visible hardware.
+              </p>
+              <div class="process-step-pills">
+                <span class="process-pill">Solid Teak Carpentry</span>
+                <span class="process-pill">Dry Stone Masonry</span>
+                <span class="process-pill">Precision Glazing</span>
+              </div>
+            </div>
+            <div class="process-img-col">
+              <img src="/assets/rooms/staircase.jpg" alt="Artisanal build" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Step 4: Handover (Final Point) -->
+          <div class="process-panel">
+            <div class="process-text-col">
+              <div class="process-step-num">04</div>
+              <h3 class="process-step-title">Atmosphere Calibration &amp; Handover</h3>
+              <p class="process-step-desc">
+                Custom linen textiles, acoustic calibration, and fine-tuning lighting Kelvin levels ensure the villa feels deeply inhabited from the moment the key turns.
+              </p>
+              <div class="process-step-pills">
+                <span class="process-pill">Custom Furniture Styling</span>
+                <span class="process-pill">Ambient Lighting Tuning</span>
+                <span class="process-pill">Private Sanctuary</span>
+              </div>
+            </div>
+            <div class="process-img-col">
+              <img src="/assets/rooms/bedroom.jpg" alt="Villa Handover" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================================================================
+           SECTION 6: FOOTER / CTA
+           =================================================================== -->
+      <footer class="footer-section" id="about">
+        <div class="footer-hero-cta">
+          <h2 class="footer-cta-headline">
+            Let's build your <span class="dream-italic">dream</span> home.
+          </h2>
+
+          <div class="magnetic-btn-wrap">
+            <button class="magnetic-circle-btn" type="button">
+              <span>Start a<br>Project</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Marquee Infinite Ribbon -->
+        <div class="marquee-strip">
+          <div class="marquee-inner">
+            <div class="marquee-content">
+              <span>Interiors</span> / <span>Exteriors</span> / <span>Landscapes</span> / <span>Furniture</span> / <span>Bespoke Joinery</span> / <span>Atmospheric Lighting</span> /
+            </div>
+            <div class="marquee-content" aria-hidden="true">
+              <span>Interiors</span> / <span>Exteriors</span> / <span>Landscapes</span> / <span>Furniture</span> / <span>Bespoke Joinery</span> / <span>Atmospheric Lighting</span> /
+            </div>
+          </div>
+        </div>
+
+        <!-- Columns Grid -->
+        <div class="footer-cols-grid">
+          <div>
+            <div class="footer-col-title">Studio Ethos</div>
+            <p class="footer-col-text">
+              KAVAL is an international architectural practice specializing in warm modern residential estates, boutique pavilions, and sensory landscapes across Southeast Asia, Japan, and Europe.
+            </p>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Locations</div>
+            <ul class="footer-col-links">
+              <li><span style="color: var(--color-cream);">Bali</span> &bull; Jl. Pantai Batu Mejan</li>
+              <li><span style="color: var(--color-cream);">Tokyo</span> &bull; Minato-ku, Aoyama</li>
+              <li><span style="color: var(--color-cream);">Zurich</span> &bull; Talstrasse 41</li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Direct Inquiries</div>
+            <ul class="footer-col-links">
+              <li><a href="mailto:commissions@kaval-atelier.com">commissions@kaval-atelier.com</a></li>
+              <li><a href="mailto:press@kaval-atelier.com">press@kaval-atelier.com</a></li>
+              <li><a href="tel:+623618491000">+62 361 849 1000</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Social &bull; Journal</div>
+            <ul class="footer-col-links">
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram &bull; @kaval.atelier</a></li>
+              <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube &bull; Cinematography</a></li>
+              <li><a href="https://pinterest.com" target="_blank" rel="noopener noreferrer">Pinterest &bull; Material Palette</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+          <div>&copy; 2026 KAVAL Architecture &amp; Interiors. All rights reserved.</div>
+          <button class="back-to-top-btn" type="button">
+            <span>Back to top</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+          </button>
+        </div>
+      </footer>
+
+    </main>
+
+    <!-- Architectural Feature Details Pop Modal (Section 4) -->
+    <div class="feature-modal-overlay" id="featureModal" role="dialog" aria-modal="true" aria-labelledby="featureModalTitle">
+      <div class="feature-modal-card">
+        <div class="feature-modal-top">
+          <div class="feature-modal-tag-badge">
+            <span class="tag-indicator-dot" style="display:inline-block; margin-right: 6px;"></span>
+            <span id="featureModalCategory">Façade &amp; Materiality</span>
+          </div>
+          <button class="feature-modal-close-btn" type="button" aria-label="Close feature details">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="feature-modal-body">
+          <h3 class="feature-modal-title" id="featureModalTitle">Teak Wood Cladding</h3>
+          <p class="feature-modal-desc" id="featureModalDesc">
+            Sustainably harvested Indonesian reclaimed teak seasoned over decades to resist tropical humidity and monsoon rains. Hand-finished with organic tung oil to preserve the deep golden-brown luster and natural grain texture, creating an insulating thermal envelope that breathes naturally.
+          </p>
+          
+          <div class="feature-modal-specs" id="featureModalSpecs">
+            <!-- Populated dynamically via JS -->
+          </div>
+          
+          <div class="feature-modal-footer">
+            <button class="feature-modal-action-btn" type="button">
+              <span>Discuss in Your Commission</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+            <button class="feature-modal-dismiss-btn" type="button">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Commission & Project Detail Modal -->
+    <div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <span class="section-kicker" style="margin-bottom: 0.5rem;">ATELIER KAVAL</span>
+            <h3 class="modal-title" id="modalTitle">Start an Architectural Commission</h3>
+          </div>
+          <button class="modal-close-btn" type="button" aria-label="Close dialog">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <p class="modal-desc" style="font-size: 14px; color: var(--color-muted); line-height: 1.6; margin-bottom: 1.5rem;">
+          Connect directly with a principal architect to discuss your site, architectural aspirations, and project milestones.
+        </p>
+        <form class="modal-form">
+          <div class="form-group">
+            <label class="form-label" for="formName">Full Name</label>
+            <input class="form-input" id="formName" type="text" placeholder="e.g. Elena Rostova" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="formEmail">Email Address</label>
+            <input class="form-input" id="formEmail" type="email" placeholder="elena@example.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="formSite">Project Location / Site</label>
+            <input class="form-input" id="formSite" type="text" placeholder="e.g. Uluwatu Cliffside, Bali" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="formNotes">Architectural Brief</label>
+            <textarea class="form-textarea" id="formNotes" rows="3" placeholder="Tell us about your desired square footage, materials, and timeline..."></textarea>
+          </div>
+          <button class="form-submit-btn" type="submit">Submit Inquiry</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Core GSAP Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

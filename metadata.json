@@ -1,0 +1,6 @@
+{
+  "name": "KAVAL Architecture & Interiors",
+  "description": "A cinematic architecture and interior design showcase featuring smooth inertial scrolling, layered parallax hero, and scroll-controlled villa walkthrough.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
